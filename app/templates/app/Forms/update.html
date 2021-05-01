@@ -1,0 +1,28 @@
+{% extends 'app/main.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-9">
+        <div class="card">
+            <h3 class="card-header card-title">Edit {{name}}: {{item}}</h3>
+            <div class="card-body">
+                <form action="" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                {% if name == 'Employee' %}
+                    <button class="btn btn-success float-end" type="submit">Edit Skill/Projects</button>
+                {% elif name == 'Skill' %}
+                    <button class="btn btn-success float-end" type="submit">Submit</button>
+                    <a href="{% url 'deleteSkill' skill.id %}" class="col-2 btn btn-lg btn-success">Delete</a>
+                {% elif name == 'Project' %}
+                    <button class="btn btn-success float-end" type="submit">Submit</button>
+                    <a href="{% url 'deleteProject' project.id %}" class="col-2 btn btn-lg btn-success">Delete</a>
+                {% endif %}
+                </form>
+            </div> 
+        </div>
+    </div>
+</div>
+
+{% endblock %}

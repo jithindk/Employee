@@ -1,0 +1,85 @@
+{% extends 'app/main.html' %}
+
+{% block content %}
+
+<class class="card container-fluid">
+    <div class="row card-header">
+        <h2 class="col h2">{{Employee.f_name}}</h2>
+            <a class="col-1 btn-lg btn-warning" href="{% url 'updateEmployee' Employee.id %}">Update</a><span class="col-1"></span>
+            <a class="col-1 btn-lg btn-danger" href="{% url 'deleteEmployee' Employee.id %}">Delete</a>
+    </div>
+    
+
+
+    <div>
+        <h3>Employee Details</h3>
+
+
+
+            <div>
+                <table class="table table-bordered table-mb table-hover">
+                    <tr>
+                      <th>Name:</th>
+                      <td>{{Employee.f_name}} {{Employee.l_name}}</td>
+                    </tr>
+                    <tr>
+                      <th>Gender:</th>
+                      <td>{{Employee.gender}}</td>
+                    </tr>
+                    <tr>
+                      <th>Address:</th>
+                      <td>{{Employee.address}}</td>
+                    </tr>
+                  </table>
+            </div>
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered table-mb table-hover">
+                    <tr>
+                        <th>
+                            <div class="col col-mb">
+                                Skill
+                                <a class="col-2 btn btn-success" href="{% url 'createSkill' Employee.id %}">Add Skill</a>
+                            </div>
+                        </th>
+                            
+                        <th>Experience</th>
+                        
+                    </tr>
+    
+                    {% for s in Employee.skill_set.all %}
+                        <tr class="table-row"data-href="{% url 'updateSkill' s.id %}">
+                            <td>
+                                {{s.S}} 
+                            </td>
+                            <td>
+                                {{s.exp}}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered table-mb table-hover">
+                    <tr>
+                        <th>
+                            <div class="col col-mb">
+                            Project
+                            <a class="col-2 btn btn-success" href="{% url 'createProject' Employee.id %}">Add Project</a>
+                        </div></th>
+                    </tr>
+    
+                    {% for p in Employee.project_set.all %}
+                        <tr class="table-row"data-href="{% url 'updateProject' p.id %}">
+                            <td>
+                                {{p.P}} 
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+    </div>
+    <br>
+    </div>
+</class>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'app/main.html' %}
+
+{% load static %}
+{% block content %}
+
+<h1 class="text-center">Employee list</h1><br>
+<div class="container-fluid">
+    <div class="card card-body container-fluid">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar" style="height: 62vh;">
+            <table class="table table-bordered table-mb table-hover">
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Project</th>
+                    <th>Skill (Experience)</th>
+                    
+                </tr>
+
+                {% for i in employee %}
+                    <tr class="table-row"data-href="{% url 'employeeDetails' i.id %}">
+                        <td>{{i.f_name}} {{i.l_name}}</td>
+                        <td>
+                            {% for p in i.project_set.all %}
+                            {{p.P}} 
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for s in i.skill_set.all %}
+                            {{s.S}} ({{s.exp}})
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+

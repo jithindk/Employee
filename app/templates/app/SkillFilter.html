@@ -1,0 +1,86 @@
+{% extends 'app/main.html' %}
+
+{% load static %}
+{% block content %}
+
+<h1 class="text-center">Employee list</h1><br>
+<div class="container-fluid">
+    <div class="card card-header">
+        <form method="GET">
+            <div class="row">
+                <div class="col col-mb">
+                    <div class="row justify-content-start">
+                        <strong class="col-2">Filter by:</strong>
+                        <div class="col-2">Skill:</div>
+                        <div class="col-3">{{searchFilter.form.S}}</div>
+                        <div class="col-2">Experience:</div>
+                        <div class="col-3">{{searchFilter.form.exp}}</div>
+                    </div>
+                </div>
+                
+                <button class="col col-2 btn btn-success my-sm-0" type="submit">Search</button>
+
+                
+            </div>
+        </form>
+    </div>
+
+    <div class="card card-body container-fluid">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar" style="height: 62vh;">
+            
+            <table class="table table-bordered table-mb table-hover">
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Project</th>
+                    <th>Skill (Experience)</th>
+                    
+                </tr>
+
+                {% for i in skill %}
+                
+                <tr class="table-row"data-href="{% url 'employeeDetails' i.employee.id %}">
+                        <td>
+                            {{i.employee.f_name}} {{i.employee.l_name}}
+                        </td>
+                        <td>
+                            {% for p in project%}
+                            {% if p.employee == i.employee %}
+                                {{p}}
+                            {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            
+                            {{i.S}} ({{i.exp}})
+                            
+                        </td>
+                </tr>
+                
+                {% endfor %}
+                
+            </table>
+            
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th>
+                        {% if emp_tot is not 0 %}
+                            Number of Employees with selected Skills: {{emp_tot}}
+                        {% endif %}
+                    </th>
+                   
+                </tr>
+                <tr>
+                    <th>
+                        Cumulation of Experience: {{exp_tot}}
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+

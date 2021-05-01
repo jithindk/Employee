@@ -1,0 +1,80 @@
+{% extends 'app/main.html' %}
+
+{% block content %}
+
+<div class="card container-fluid">
+    <div class="row card-header">
+        <h2 class="col h2">{{Employee.f_name}}</h2>
+            <a class="col-1 btn-lg btn-warning" href="{% url 'updateEmployee' Employee.id %}">Update</a><span class="col-1"></span>
+            <a class="col-1 btn-lg btn-danger" href="{% url 'deleteEmployee' Employee.id %}">Delete</a>
+    </div>
+
+    <div class="card-title bg-light row justify-content-center">
+        <h3 class="col-3 h3">Skills:</h3>
+            <a href="{% url 'createSkill' Employee.id %}" class="col-2 btn btn-lg btn-success">Add Skill</a>
+    </div>
+
+    <div class="card-title bg-light row justify-content-center">
+        <h3 class="col-3 h3">Project:</h3>
+            <a href="{% url 'createProject' Employee.id %}" class="col-2 btn btn-lg btn-success">Add Project</a>
+    </div>
+    
+        <div id="accordian">
+            {% for s in S %}
+            <div class="card container-fluid">
+                <button class="btn bg-light row" data-toggle="collapse", data-target="#s{{ forloop.counter }}" aria-controls="s{{ forloop.counter }}">
+                    <div class="card-title row" id="Q1">
+                        <h4 class="mb-0 col">
+                            Skill {{ forloop.counter }}
+                        </h4>
+                        <a href="{% url 'updateSkill' s.id %}" class="col-1 btn-lg btn-warning">Edit</a>
+                        <span class="col-1"></span>
+                        <a href="{% url 'deleteSkill' s.id %}" class="col-1 btn-lg btn-danger">Delete</a>
+                    </div>
+                </button>
+
+                <div class="collapse" id="s{{ forloop.counter }}" aria-labelledby="Q1" data-parent="#accordian">
+                    <div class="card-body">
+                        <p class="text-dark">{{ s.S }}</p>
+                        <p><strong>Experience: </strong>{{ s.exp }}</p>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter == 1 %}
+                <script>
+                    document.getElementById("s{{ forloop.counter }}").classList.add('show')
+                </script>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div id="accordian">
+            {% for p in P %}
+            <div class="card container-fluid">
+                <button class="btn bg-light row" data-toggle="collapse", data-target="#p{{ forloop.counter }}" aria-controls="p{{ forloop.counter }}">
+                    <div class="card-title row" id="Q1">
+                        <h4 class="mb-0 col">
+                            Project {{ forloop.counter }}
+                        </h4>
+                        <a href="{% url 'updateProject' p.id %}" class="col-1 btn-lg btn-warning">Edit</a>
+                        <span class="col-1"></span>
+                        <a href="{% url 'deleteProject' p.id %}" class="col-1 btn-lg btn-danger">Delete</a>
+                    </div>
+                </button>
+
+                <div class="collapse" id="p{{ forloop.counter }}" aria-labelledby="Q1" data-parent="#accordian">
+                    <div class="card-body">
+                        <p class="text-dark">{{ p.P }}</p>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter == 1 %}
+                <script>
+                    document.getElementById("s{{ forloop.counter }}").classList.add('show')
+                </script>
+            {% endif %}
+            {% endfor %}
+        </div>
+    <br>
+</div>
+
+{% endblock %}
