@@ -15,7 +15,7 @@
                 {% elif name == 'Skill' %}
                     <button class="btn btn-success float-end" type="submit">Submit</button>
                     <a href="{% url 'deleteSkill' skill.id %}" class="col-2 btn btn-lg btn-success">Delete</a>
-                {% elif name == 'Project' %}
+                {% else %}
                     <button class="btn btn-success float-end" type="submit">Submit</button>
                     <a href="{% url 'deleteProject' project.id %}" class="col-2 btn btn-lg btn-success">Delete</a>
                 {% endif %}

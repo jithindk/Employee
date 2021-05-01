@@ -90,7 +90,7 @@ def Create_Skill(request, pk):
             return redirect('employeeDetails', employee.id)
 
     context = {"form":form, "Employee":employee}
-    return render(request, 'app/Forms/CreateEmployee.html', context)
+    return render(request, 'app/Forms/CreateSkill.html', context)
 
 
 
@@ -132,7 +132,7 @@ def Create_Project(request, pk):
             return redirect('employeeDetails', employee.id)
 
     context = {"form":form, "Employee":employee}
-    return render(request, 'app/Forms/CreateEmployee.html', context)
+    return render(request, 'app/Forms/CreateProject.html', context)
 
 
 
